@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:37:25 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/11 00:28:07 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/17 00:22:22 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,30 @@
 #include <sys/time.h>
 #include <pthread.h>
 
+#define MAX_PHILOSOPHERS 200
+
+
 typedef struct s_info
 {
-	int number_of_philo;
+	int num_philosophers;
 	int time_to_die;
 	int time_to_eat;
 	int time_to_sleep;
-	int times_philo_must_eat;
-} t_info;
+	int num_times_each_must_eat; // optional argument
+	unsigned long long	start_time;
+	pthread_mutex_t print_mutex;
+}	t_info;
 
-typedef struct s_philo
-{
-
+typedef struct s_philo{
+    int id;
+    int times_eaten;
+    unsigned long long last_meal_time;
+    pthread_mutex_t left_fork;
+    pthread_mutex_t right_fork;
+	pthread_t threads[MAX_PHILOSOPHERS];
+	t_info *info;
 } t_philo;
+
 
 int	check_is_digit(char **argv);
 long long	ft_atoi(const char *str);
