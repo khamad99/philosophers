@@ -6,6 +6,12 @@ SRC				=	parsing.c \
 					philo_utils.c \
 					philo.c \
 					thread_function.c \
+					philo_exit.c \
+					philo_init.c \
+					philo_join.c \
+					philo_usleep.c \
+					philo_monitoring.c \
+
 
 OBJ				=	$(SRC:%.c=%.o)
 

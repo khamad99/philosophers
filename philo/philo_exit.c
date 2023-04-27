@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 14:02:32 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/26 14:30:43 by kalshaer         ###   ########.fr       */
+/*   Created: 2023/04/18 14:18:02 by kalshaer          #+#    #+#             */
+/*   Updated: 2023/04/27 14:10:54 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int main(int argc, char** argv)
+void	philo_exit(t_philo *philo)
 {
-	t_info	info[1];
-	t_philo	philo[MAX_PHILO];
-	int flag;
+	int i;
 
-	flag = 0;
-	if (parceing_check(argc, argv))
-		return (1);
-	data_init(argc, argv, &flag, philo, info);
-	if (flag)
-	{
-		printf("pthread creating faild\n");
-		philo_exit(philo);
-		return (1);
-	}
-	flag = monitoring(philo);
-	if (flag == 2)
-		return (1);
-	else if (flag == 1)
-		philo_join(philo);
-	philo_exit(philo);
-	return (0);
+	i = -1;
+	while (++i < philo->info->num_philo)
+		pthread_mutex_destroy(&philo->info->forks_m[i]);
+	pthread_mutex_destroy(&philo->info->print_mutex);
+	pthread_mutex_destroy(&philo->info->dead_m);
+	pthread_mutex_destroy(&philo->info->meals_num_m);
 }
