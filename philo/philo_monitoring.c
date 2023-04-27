@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:10:37 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 14:17:10 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:04:45 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	monitoring(t_philo *philo)
 {
 	while (1)
 	{
-		philo_usleep(10);
+		philo_usleep(8);
 		if (all_done_eating(philo))
 			return (1);
 		else if (someone_dead(philo))

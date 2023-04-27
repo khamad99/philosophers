@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:37:25 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 14:19:49 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:51:01 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void 				print_timestamped_message(char* message, t_philo *philosopher);
 void				philo_join(t_philo *philo);
 void				philo_exit(t_philo *philo);
 int					monitoring(t_philo *philo);
+int					someone_dead(t_philo *philo);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 00:09:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 14:16:59 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:01:53 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	release_forks(t_philo *philo)
 {
 		philo->info->forks[philo->lfork] = 0;
 		philo->info->forks[philo->rfork] = 0;
-		pthread_mutex_unlock(&philo->info->forks_m[philo->lfork]);
-		pthread_mutex_unlock(&philo->info->forks_m[philo->rfork]);
 		philo->times_eaten++;
 		philo->last_meal_time = get_time_ms() - philo->info->start_time;
+		pthread_mutex_unlock(&philo->info->forks_m[philo->lfork]);
+		pthread_mutex_unlock(&philo->info->forks_m[philo->rfork]);
 		if (philo->times_eaten < philo->info->num_times_each_must_eat || philo->info->num_times_each_must_eat == -1)
 		{
 			print_timestamped_message("is sleeping", philo);
@@ -87,7 +87,7 @@ void* philo_thread(void* arg)
 		{
 			if (check_forks(philo))
 				break;
-			philo_usleep(7);
+			philo_usleep(5);
 		}
 	}
 	return (0);
