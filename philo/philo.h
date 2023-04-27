@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:37:25 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 14:11:20 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:19:49 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_philo
 	unsigned long long last_meal_time;
 	pthread_t thread;
 	t_info *info;
-} t_philo;
+}	t_philo;
 
 
 int					parceing_check(int argc, char **argv);
@@ -64,8 +64,6 @@ void 				print_timestamped_message(char* message, t_philo *philosopher);
 void				philo_join(t_philo *philo);
 void				philo_exit(t_philo *philo);
 int					monitoring(t_philo *philo);
-int	someone_dead(t_philo *philo);
-int	all_done_eating(t_philo *philo);
 
 
 
