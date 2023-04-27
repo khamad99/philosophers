@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 14:00:24 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/19 17:57:08 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:20:33 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 unsigned long long get_time_ms()
 {
-   struct timeval	tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));

@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 23:58:50 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/19 14:05:17 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:22:47 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ long long	ft_atoi(const char *str)
 	return (r * s);
 }
 
-void print_timestamped_message(char* message, t_philo *philosopher)
+void print_timestamped_message(char* message, t_philo *philo)
 {
-    unsigned long long timestamp_ms = get_time_ms();
-    pthread_mutex_lock(&philosopher->info->print_mutex);
-    printf("%llu %d %s\n", timestamp_ms - philosopher->info->start_time, philosopher->id, message);
-    pthread_mutex_unlock(&philosopher->info->print_mutex);
+    unsigned long long timestamp_ms = get_time_ms() - philo->info->start_time;
+    pthread_mutex_lock(&philo->info->print_mutex);
+    printf("%llu %d %s\n", timestamp_ms, philo->id, message);
+    pthread_mutex_unlock(&philo->info->print_mutex);
 }
