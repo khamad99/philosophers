@@ -6,13 +6,13 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 14:00:24 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 14:20:33 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:45:37 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
-unsigned long long get_time_ms()
+unsigned long long	get_time_ms(void)
 {
 	struct timeval	tv;
 

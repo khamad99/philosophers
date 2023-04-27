@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:14:12 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/20 18:38:23 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 21:17:15 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	philo_join(t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < philo->info->num_philo)

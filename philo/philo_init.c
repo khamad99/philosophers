@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:01:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 14:10:48 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/27 22:02:55 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	mutex_init(t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < philo->info->num_philo)
@@ -22,12 +22,11 @@ void	mutex_init(t_philo *philo)
 	pthread_mutex_init(&philo->info->print_mutex, NULL);
 	pthread_mutex_init(&philo->info->dead_m, NULL);
 	pthread_mutex_init(&philo->info->meals_num_m, NULL);
-
 }
 
 void	info_init(t_info *info, char **argv, int argc)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	info->num_philo = ft_atoi(argv[1]);
@@ -43,16 +42,16 @@ void	info_init(t_info *info, char **argv, int argc)
 		info->num_times_each_must_eat = -1;
 	while (++i < info->num_philo)
 		info->forks[i] = 0;
-	
 }
 
-
-void	philo_init(int *flag, t_info *info, t_philo	*philo)
+int	philo_init(t_info *info, t_philo	*philo)
 {
 	int		i;
+	int		flag;
 
 	i = -1;
-	while (++i < info->num_philo) 
+	flag = 0;
+	while (++i < info->num_philo)
 	{
 		philo[i].id = i + 1;
 		philo[i].times_eaten = 0;
@@ -63,14 +62,20 @@ void	philo_init(int *flag, t_info *info, t_philo	*philo)
 		else
 			philo[i].rfork = i - 1;
 		philo[i].info = info;
-		if (pthread_create(&philo[i].thread, NULL, philo_thread, &philo[i]) != 0 )
-			*flag = 1;
+		if (pthread_create(&philo[i].thread, NULL,
+				philo_thread, &philo[i]) != 0)
+			flag = 1;
 	}
+	return (flag);
 }
 
-void	data_init(int argc, char **argv, int *flag, t_philo *philo, t_info *info)
-{	
+int	data_init(int argc, char **argv,
+	t_philo *philo, t_info *info)
+{
+	int	flag;
+
 	info_init(info, argv, argc);
-	philo_init(flag, info, philo);
+	flag = philo_init(info, philo);
 	mutex_init(philo);
+	return (flag);
 }
