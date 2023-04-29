@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 00:09:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/29 14:57:14 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/29 22:25:06 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int	done_eating(t_philo *philo)
 
 void	release_forks(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->info->forks_m[philo->lfork]);
 	philo->info->forks[philo->lfork] = 0;
 	pthread_mutex_unlock(&philo->info->forks_m[philo->lfork]);
+	pthread_mutex_lock(&philo->info->forks_m[philo->rfork]);
 	philo->info->forks[philo->rfork] = 0;
 	pthread_mutex_unlock(&philo->info->forks_m[philo->rfork]);
 	pthread_mutex_lock(&philo->info->times_eaten_m);
@@ -56,9 +58,11 @@ void	get_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->info->forks_m[philo->lfork]);
 	philo->info->forks[philo->lfork] = 1;
+	pthread_mutex_unlock(&philo->info->forks_m[philo->lfork]);
 	print_timestamped_message("has taken a fork", philo);
 	pthread_mutex_lock(&philo->info->forks_m[philo->rfork]);
 	philo->info->forks[philo->rfork] = 1;
+	pthread_mutex_unlock(&philo->info->forks_m[philo->rfork]);
 	print_timestamped_message("has taken a fork", philo);
 	print_timestamped_message("is eating", philo);
 	philo_usleep(philo->info->time_to_eat);
