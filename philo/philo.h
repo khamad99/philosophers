@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:37:25 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 22:03:32 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:18:49 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ typedef struct s_info
 	unsigned long long	start_time;
 	pthread_mutex_t		dead_m;
 	pthread_mutex_t		start_eating_m;
+	pthread_mutex_t		times_eaten_m;
 	pthread_mutex_t		forks_m[MAX_PHILO];
 	pthread_mutex_t		meals_num_m;
 	pthread_mutex_t		print_mutex;
+	pthread_mutex_t		last_meal_time_m;
 }	t_info;
 
 typedef struct s_philo

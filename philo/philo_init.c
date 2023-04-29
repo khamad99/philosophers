@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:01:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 22:02:55 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/29 14:00:52 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	mutex_init(t_philo *philo)
 	pthread_mutex_init(&philo->info->print_mutex, NULL);
 	pthread_mutex_init(&philo->info->dead_m, NULL);
 	pthread_mutex_init(&philo->info->meals_num_m, NULL);
+	pthread_mutex_init(&philo->info->times_eaten_m, NULL);
+	pthread_mutex_init(&philo->info->start_eating_m, NULL);
+	pthread_mutex_init(&philo->info->last_meal_time_m, NULL);
 }
 
 void	info_init(t_info *info, char **argv, int argc)
@@ -57,14 +60,13 @@ int	philo_init(t_info *info, t_philo	*philo)
 		philo[i].times_eaten = 0;
 		philo[i].last_meal_time = 0;
 		philo[i].lfork = i;
-		if (i - 1 < 0)
+		if (info->num_philo == 1)
+			philo[i].rfork = -1;
+		else if (i - 1 < 0)
 			philo[i].rfork = info->num_philo - 1;
 		else
 			philo[i].rfork = i - 1;
 		philo[i].info = info;
-		if (pthread_create(&philo[i].thread, NULL,
-				philo_thread, &philo[i]) != 0)
-			flag = 1;
 	}
 	return (flag);
 }
@@ -73,9 +75,17 @@ int	data_init(int argc, char **argv,
 	t_philo *philo, t_info *info)
 {
 	int	flag;
+	int	i;
 
 	info_init(info, argv, argc);
 	flag = philo_init(info, philo);
 	mutex_init(philo);
+	i = -1;
+	while (++i < info->num_philo)
+	{
+		if (pthread_create(&philo[i].thread, NULL,
+				philo_thread, &philo[i]) != 0)
+			flag = 1;
+	}
 	return (flag);
 }

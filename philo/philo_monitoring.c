@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:10:37 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 22:16:52 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/29 14:07:28 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,27 @@
 
 int	someone_dead(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->info->last_meal_time_m);
 	if (get_time_ms() - philo->info->start_time - philo
 		->last_meal_time >= (unsigned long long)philo->info->time_to_die)
 	{
+		pthread_mutex_unlock(&philo->info->last_meal_time_m);
 		pthread_mutex_lock(&philo->info->dead_m);
 		philo->info->dead = 1;
 		pthread_mutex_unlock(&philo->info->dead_m);
 		print_timestamped_message("died", philo);
 		return (1);
 	}
+	else
+		pthread_mutex_unlock(&philo->info->last_meal_time_m);
 	pthread_mutex_lock(&philo->info->dead_m);
 	if (philo->info->dead)
 	{
 		pthread_mutex_unlock(&philo->info->dead_m);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->info->dead_m);
+	else
+		pthread_mutex_unlock(&philo->info->dead_m);
 	return (0);
 }
 
@@ -43,7 +48,8 @@ int	all_done_eating(t_philo *philo)
 			pthread_mutex_unlock(&philo->info->meals_num_m);
 			return (1);
 		}
-		pthread_mutex_unlock(&philo->info->meals_num_m);
+		else
+			pthread_mutex_unlock(&philo->info->meals_num_m);
 	}
 	return (0);
 }
@@ -52,10 +58,11 @@ int	monitoring(t_philo *philo)
 {
 	while (1)
 	{
-		usleep(5);
+		usleep(20);
 		if (all_done_eating(philo))
 			return (1);
-		else if (someone_dead(philo))
+		usleep(20);
+		if (someone_dead(philo))
 			return (2);
 	}
 	return (0);

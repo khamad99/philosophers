@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:18:02 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/27 21:14:51 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/29 14:04:19 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,7 @@ void	philo_exit(t_philo *philo)
 	pthread_mutex_destroy(&philo->info->print_mutex);
 	pthread_mutex_destroy(&philo->info->dead_m);
 	pthread_mutex_destroy(&philo->info->meals_num_m);
+	pthread_mutex_destroy(&philo->info->times_eaten_m);
+	pthread_mutex_destroy(&philo->info->start_eating_m);
+	pthread_mutex_destroy(&philo->info->last_meal_time_m);
 }
