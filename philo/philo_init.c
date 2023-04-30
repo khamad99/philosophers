@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:01:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/29 14:00:52 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 09:43:16 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	info_init(t_info *info, char **argv, int argc)
 	info->time_to_sleep = ft_atoi(argv[4]);
 	info->meals_num = 0;
 	info->dead = 0;
+	info->dead_id = 0;
 	if (argc == 6)
 		info->num_times_each_must_eat = ft_atoi(argv[5]);
 	else
@@ -62,7 +63,7 @@ int	philo_init(t_info *info, t_philo	*philo)
 		philo[i].lfork = i;
 		if (info->num_philo == 1)
 			philo[i].rfork = -1;
-		else if (i - 1 < 0)
+		else if (i - 1 < 0 && info->num_philo != 1)
 			philo[i].rfork = info->num_philo - 1;
 		else
 			philo[i].rfork = i - 1;
@@ -85,6 +86,9 @@ int	data_init(int argc, char **argv,
 	{
 		if (pthread_create(&philo[i].thread, NULL,
 				philo_thread, &philo[i]) != 0)
+			flag = 1;
+		if (pthread_create(&philo[i].dead_thread,
+				NULL, dead_thread, &philo[i]) != 0)
 			flag = 1;
 	}
 	return (flag);

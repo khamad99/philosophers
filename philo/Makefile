@@ -11,6 +11,7 @@ SRC				=	parsing.c \
 					philo_join.c \
 					philo_usleep.c \
 					philo_monitoring.c \
+					dead_thread.c \
 
 
 OBJ				=	$(SRC:%.c=%.o)

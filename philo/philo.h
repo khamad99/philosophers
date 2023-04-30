@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:37:25 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/29 12:18:49 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 09:40:58 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_info
 	int					meals_num;
 	int					forks[MAX_PHILO];
 	int					dead;
+	int					dead_id;
 	unsigned long long	start_time;
 	pthread_mutex_t		dead_m;
 	pthread_mutex_t		start_eating_m;
@@ -50,6 +51,7 @@ typedef struct s_philo
 	int					rfork;
 	unsigned long long	last_meal_time;
 	pthread_t			thread;
+	pthread_t			dead_thread;
 	t_info				*info;
 }	t_philo;
 
@@ -59,10 +61,11 @@ long long			ft_atoi(const char *str);
 int					data_init(int argc, char **argv,
 						t_philo *philo, t_info *info);
 void				*philo_thread(void *arg);
+void				*dead_thread(void *arg);
 void				philo_usleep(unsigned long long time);
 unsigned long long	get_time_ms(void);
 void				print_timestamped_message(char *message,
-						t_philo *philosopher);
+						t_philo *philosopher, int id);
 void				philo_join(t_philo *philo);
 void				philo_exit(t_philo *philo);
 int					monitoring(t_philo *philo);

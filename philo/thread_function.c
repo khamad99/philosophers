@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 00:09:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/29 22:25:06 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 09:35:26 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	release_forks(t_philo *philo)
 	if (philo->times_eaten < philo->info->num_times_each_must_eat || philo
 		->info->num_times_each_must_eat == -1)
 	{
-		print_timestamped_message("is sleeping", philo);
+		print_timestamped_message("is sleeping", philo, 0);
 		pthread_mutex_unlock(&philo->info->times_eaten_m);
 		philo_usleep(philo->info->time_to_sleep);
 	}
@@ -59,12 +59,12 @@ void	get_forks(t_philo *philo)
 	pthread_mutex_lock(&philo->info->forks_m[philo->lfork]);
 	philo->info->forks[philo->lfork] = 1;
 	pthread_mutex_unlock(&philo->info->forks_m[philo->lfork]);
-	print_timestamped_message("has taken a fork", philo);
+	print_timestamped_message("has taken a fork", philo, 0);
 	pthread_mutex_lock(&philo->info->forks_m[philo->rfork]);
 	philo->info->forks[philo->rfork] = 1;
 	pthread_mutex_unlock(&philo->info->forks_m[philo->rfork]);
-	print_timestamped_message("has taken a fork", philo);
-	print_timestamped_message("is eating", philo);
+	print_timestamped_message("has taken a fork", philo, 0);
+	print_timestamped_message("is eating", philo, 0);
 	philo_usleep(philo->info->time_to_eat);
 	release_forks(philo);
 }
@@ -103,9 +103,9 @@ void	*philo_thread(void *arg)
 	philo = (t_philo *) arg;
 	if (philo->id % 2 == 1)
 		usleep(100);
-	while (done_eating(philo) == 0 && someone_dead(philo) == 0)
+	while (done_eating(philo) == 0)
 	{
-		print_timestamped_message("is thinking", philo);
+		print_timestamped_message("is thinking", philo, 0);
 		while (1)
 		{
 			usleep(20);
