@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 14:02:32 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 09:17:27 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 12:17:01 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_info	info[1];
-	t_philo	philo[MAX_PHILO];
+	t_philo	philo[ft_atoi(argv[1]) + 1];
 	int		flag;
 
 	if (parceing_check(argc, argv))

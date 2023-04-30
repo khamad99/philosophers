@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 09:27:58 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 09:31:07 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 11:59:30 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	*dead_thread(void *arg)
 		{
 			pthread_mutex_unlock(&philo->info->last_meal_time_m);
 			pthread_mutex_lock(&philo->info->dead_m);
-			philo->info->dead = 1;
-			philo->info->dead_id = philo->id;
+			philo->info->dead = philo->id;
 			pthread_mutex_unlock(&philo->info->dead_m);
+			return (0);
 		}
 		else
 			pthread_mutex_unlock(&philo->info->last_meal_time_m);

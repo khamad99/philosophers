@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 00:09:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 09:35:26 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 11:54:15 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	done_eating(t_philo *philo)
 	{
 		pthread_mutex_unlock(&philo->info->times_eaten_m);
 		pthread_mutex_lock(&philo->info->meals_num_m);
+		philo->done_eating = 1;
 		philo->info->meals_num++;
 		pthread_mutex_unlock(&philo->info->meals_num_m);
 		return (1);
