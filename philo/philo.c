@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 14:02:32 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 13:24:40 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 13:40:34 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	main(int argc, char **argv)
 	}
 	flag = monitoring(philo);
 	if (flag == 2)
+	{
+		print_timestamped_message("dead", philo, philo->info->dead);
 		return (1);
+	}
 	else if (flag == 1)
 		philo_join(philo);
 	philo_exit(philo);

@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 00:09:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 13:14:17 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 13:59:35 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	release_forks(t_philo *philo)
 	philo->last_meal_time = get_time_ms() - philo->info->start_time;
 	pthread_mutex_unlock(&philo->info->last_meal_time_m);
 	pthread_mutex_lock(&philo->info->times_eaten_m);
-	if (philo->times_eaten < philo->info->num_times_each_must_eat || philo
-		->info->num_times_each_must_eat == -1)
+	if ((philo->times_eaten < philo->info->num_times_each_must_eat || philo
+			->info->num_times_each_must_eat == -1) && someone_dead(philo) == 0)
 	{
 		print_timestamped_message("is sleeping", philo, 0);
 		pthread_mutex_unlock(&philo->info->times_eaten_m);
@@ -104,17 +104,16 @@ void	*philo_thread(void *arg)
 	philo = (t_philo *) arg;
 	if (philo->id % 2 == 1)
 		usleep(100);
-	while (done_eating(philo) == 0)
+	while (done_eating(philo) == 0 && someone_dead(philo) == 0)
 	{
 		print_timestamped_message("is thinking", philo, 0);
-		while (1)
+		while (someone_dead(philo) == 0)
 		{
-			usleep(20);
+			usleep(50);
 			if (check_forks(philo))
 				break ;
-			usleep(20);
 		}
-		usleep(20);
+		usleep(10);
 	}
 	pthread_mutex_lock(&philo->info->flag_m);
 	philo->flag = 1;
