@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 00:09:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 13:59:35 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 14:26:09 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	*philo_thread(void *arg)
 			if (check_forks(philo))
 				break ;
 		}
-		usleep(10);
+		usleep(20);
 	}
 	pthread_mutex_lock(&philo->info->flag_m);
 	philo->flag = 1;

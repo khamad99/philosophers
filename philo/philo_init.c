@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:01:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 13:29:50 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 14:23:12 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	philo_init(t_info *info, t_philo	*philo)
 			philo[i].rfork = -1;
 		else if (i - 1 < 0 && info->num_philo != 1)
 			philo[i].rfork = info->num_philo - 1;
-		else if (i - 1 > 0 && info->num_philo != 1)
+		else if (i - 1 >= 0 && info->num_philo != 1)
 			philo[i].rfork = i - 1;
 		philo[i].info = info;
 	}
