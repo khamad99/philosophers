@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:37:25 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 13:12:29 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 22:54:53 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_info
 	pthread_mutex_t		meals_num_m;
 	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		last_meal_time_m;
-	pthread_mutex_t		flag_m;
 }	t_info;
 
 typedef struct s_philo
@@ -63,7 +62,6 @@ long long			ft_atoi(const char *str);
 int					data_init(int argc, char **argv,
 						t_philo *philo, t_info *info);
 void				*philo_thread(void *arg);
-void				*dead_thread(void *arg);
 void				philo_usleep(unsigned long long time);
 unsigned long long	get_time_ms(void);
 void				print_timestamped_message(char *message,
@@ -72,5 +70,6 @@ void				philo_join(t_philo *philo);
 void				philo_exit(t_philo *philo);
 int					monitoring(t_philo *philo);
 int					someone_dead(t_philo *philo);
+int					philo_dead(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:14:12 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 13:10:19 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 22:14:10 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ void	philo_join(t_philo *philo)
 	while (++i < philo->info->num_philo)
 	{
 		pthread_join(philo[i].thread, NULL);
-		pthread_join(philo[i].dead_thread, NULL);
 	}
 }

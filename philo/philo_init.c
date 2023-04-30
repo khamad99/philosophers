@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:01:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 14:23:12 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 22:55:13 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	mutex_init(t_philo *philo)
 	pthread_mutex_init(&philo->info->times_eaten_m, NULL);
 	pthread_mutex_init(&philo->info->start_eating_m, NULL);
 	pthread_mutex_init(&philo->info->last_meal_time_m, NULL);
-	pthread_mutex_init(&philo->info->flag_m, NULL);
 }
 
 void	info_init(t_info *info, char **argv, int argc)
@@ -61,7 +60,6 @@ int	philo_init(t_info *info, t_philo	*philo)
 		philo[i].times_eaten = 0;
 		philo[i].done_eating = 0;
 		philo[i].last_meal_time = 0;
-		philo[i].flag = 0;
 		philo[i].lfork = i;
 		if (info->num_philo == 1)
 			philo[i].rfork = -1;
@@ -88,9 +86,6 @@ int	data_init(int argc, char **argv,
 	{
 		if (pthread_create(&philo[i].thread, NULL,
 				philo_thread, &philo[i]) != 0)
-			flag = 1;
-		if (pthread_create(&philo[i].dead_thread,
-				NULL, dead_thread, &philo[i]) != 0)
 			flag = 1;
 	}
 	return (flag);
