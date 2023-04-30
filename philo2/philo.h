@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:37:25 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 22:14:45 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 22:54:53 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_info
 	pthread_mutex_t		meals_num_m;
 	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		last_meal_time_m;
-	pthread_mutex_t		flag_m;
 }	t_info;
 
 typedef struct s_philo
