@@ -6,7 +6,7 @@
 /*   By: kalshaer <kalshaer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 14:01:06 by kalshaer          #+#    #+#             */
-/*   Updated: 2023/04/30 12:11:41 by kalshaer         ###   ########.fr       */
+/*   Updated: 2023/04/30 13:29:50 by kalshaer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	mutex_init(t_philo *philo)
 	pthread_mutex_init(&philo->info->times_eaten_m, NULL);
 	pthread_mutex_init(&philo->info->start_eating_m, NULL);
 	pthread_mutex_init(&philo->info->last_meal_time_m, NULL);
+	pthread_mutex_init(&philo->info->flag_m, NULL);
 }
 
 void	info_init(t_info *info, char **argv, int argc)
@@ -60,12 +61,13 @@ int	philo_init(t_info *info, t_philo	*philo)
 		philo[i].times_eaten = 0;
 		philo[i].done_eating = 0;
 		philo[i].last_meal_time = 0;
+		philo[i].flag = 0;
 		philo[i].lfork = i;
 		if (info->num_philo == 1)
 			philo[i].rfork = -1;
 		else if (i - 1 < 0 && info->num_philo != 1)
 			philo[i].rfork = info->num_philo - 1;
-		else
+		else if (i - 1 > 0 && info->num_philo != 1)
 			philo[i].rfork = i - 1;
 		philo[i].info = info;
 	}
